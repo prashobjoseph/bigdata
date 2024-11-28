@@ -1,0 +1,103 @@
+create database trial;
+use trial;
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Department VARCHAR(50),
+    Salary DECIMAL(10, 2)
+);
+
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Department, Salary)
+VALUES
+(1, 'John', 'Doe', 'Marketing', 50000.00),
+(2, 'Jane', 'Smith', 'Sales', 60000.00),
+(3, 'Sam', 'Brown', 'IT', 70000.00),
+(4, 'Alice', 'Johnson', 'HR', 55000.00),
+(5, 'Bob', 'Davis', 'IT', 75000.00);
+
+SELECT * FROM Employees;
+UPDATE Employees
+SET Salary = 75000.00
+WHERE EmployeeID = 3;
+
+DELETE FROM Employees
+WHERE EmployeeID = 5;
+ALTER TABLE Employees
+ADD Email VARCHAR(100);
+SELECT COUNT(*) FROM Employees;
+SELECT DISTINCT Department FROM Employees;
+SELECT * FROM Employees WHERE Department = 'IT';
+SELECT * FROM Employees ORDER BY Salary DESC;
+
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50),
+    ManagerID INT
+);
+
+INSERT INTO Departments (DepartmentID, DepartmentName, ManagerID)
+VALUES
+(1, 'Marketing', 1),  -- John Doe is the manager
+(2, 'Sales', 2),      -- Jane Smith is the manager
+(3, 'IT', 3),         -- Sam Brown is the manager
+(4, 'HR', 4);         -- Alice Johnson is the manager
+
+SELECT Employees.EmployeeID, Employees.FirstName, Employees.LastName, Departments.DepartmentName
+FROM Employees
+INNER JOIN Departments
+ON Employees.EmployeeID = Departments.ManagerID;
+
+SELECT Employees.EmployeeID, Employees.FirstName, Employees.LastName, Departments.DepartmentName
+FROM Employees
+LEFT JOIN Departments
+ON Employees.EmployeeID = Departments.ManagerID;
+
+SELECT Employees.EmployeeID, Employees.FirstName, Employees.LastName, Departments.DepartmentName
+FROM Employees
+RIGHT JOIN Departments
+ON Employees.EmployeeID = Departments.ManagerID;
+
+SELECT Employees.EmployeeID, Employees.FirstName, Employees.LastName, Departments.DepartmentName
+FROM Employees;
+
+SELECT Employees.EmployeeID, Employees.FirstName, Employees.LastName, Departments.DepartmentName
+FROM Employees
+Right JOIN Departments ON Employees.EmployeeID = Departments.ManagerID
+union
+SELECT Employees.EmployeeID, Employees.FirstName, Employees.LastName, Departments.DepartmentName
+FROM Employees
+LEFT JOIN Departments
+ON Employees.EmployeeID = Departments.ManagerID;
+
+
+
+SELECT Employees.EmployeeID, Employees.FirstName, Departments.DepartmentName
+FROM Employees
+CROSS JOIN Departments;
+
+SELECT E1.EmployeeID AS Employee1, E1.FirstName AS Employee1Name, E2.EmployeeID AS Employee2, E2.FirstName AS Employee2Name
+FROM Employees E1
+INNER JOIN Employees E2
+ON E1.Department = E2.Department
+WHERE E1.EmployeeID <> E2.EmployeeID;
+
+
+SELECT E1.EmployeeID AS Employee1, E1.FirstName AS Employee1Name, E2.EmployeeID AS Employee2, E2.FirstName AS Employee2Name
+FROM Employees E1
+INNER JOIN Employees E2
+ON E1.Department = E2.Department
+WHERE E1.EmployeeID <> E2.EmployeeID;
+
+SELECT E.EmployeeID, E.FirstName, E.LastName, D.DepartmentName, M.FirstName AS ManagerFirstName, M.LastName AS ManagerLastName
+FROM Employees E
+INNER JOIN Departments D
+ON E.EmployeeID = D.ManagerID
+INNER JOIN Employees M
+ON D.ManagerID = M.EmployeeID;
+
+ALTER TABLE Employees 
+rename column EmployeeID to WorkerID;
+
+SELECT * FROM transformed_data;
