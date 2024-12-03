@@ -12,7 +12,7 @@ DB_HOST = '18.132.73.146'      # Corrected IP address
 DB_PORT = '5432'               # Default PostgreSQL port
 DB_NAME = 'testdb'             # Replace with your PostgreSQL database name
 CSV_FILE_PATH = "C:/Users/prash/Downloads/customers-1000-dataset.csv"  # Replace with the path to your CSV file
-TABLE_NAME = 'firsttable'  # Replace with the desired table name
+TABLE_NAME = 'firsttablepr29'  # Replace with the desired table name
 
 try:
     # Construct the database URL using the provided credentials
@@ -50,3 +50,43 @@ finally:
         # Dispose of the SQLAlchemy engine
         engine.dispose()
         print("Database connection closed.")
+
+from flask import Flask, jsonify
+#import pandas as pd
+#from sqlalchemy import create_engine
+
+
+
+# Flask Application Setup
+app = Flask(__name__)
+
+# Route to fetch data from the database and return it as JSON
+@app.route('/fetch-data', methods=['GET'])
+def fetch_data():
+    try:
+        # Construct the database URL using the provided credentials
+        DATABASE_URL = f"{DATABASE_TYPE}+{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+        # Create a SQLAlchemy engine for PostgreSQL
+        engine = create_engine(DATABASE_URL)
+
+        # SQL query to fetch all data from the table
+        query = f"SELECT * FROM {TABLE_NAME};"
+
+        # Execute the query and load the data into a Pandas DataFrame
+        df = pd.read_sql(query, engine)
+
+        # Close the database connection
+        engine.dispose()
+
+        # Convert the DataFrame to JSON format and return it
+        return jsonify(df.to_dict(orient='records')), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Run the Flask application
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
+#The API is accessible at the endpoint /fetch-data.
