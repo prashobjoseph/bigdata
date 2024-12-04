@@ -16,7 +16,8 @@ TABLE_NAME = 'firsttablepr29'  # Replace with the desired table name
 
 try:
     # Construct the database URL using the provided credentials
-    DATABASE_URL = f"{DATABASE_TYPE}+{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    #DATABASE_URL = f"{DATABASE_TYPE}+{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    DATABASE_URL = 'postgresql://consultants:WelcomeItc%402022@18.132.73.146:5432/testdb'
 
 
     # Create a SQLAlchemy engine for PostgreSQL
@@ -66,7 +67,7 @@ def fetch_data():
     try:
         # Construct the database URL using the provided credentials
         #DATABASE_URL = f"{DATABASE_TYPE}+{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-        DATABASE_URL = 'postgresql://consultants:WelcomeItc%402022@18.132.73.146:5432/firsttablepr29'
+        DATABASE_URL = 'postgresql://consultants:WelcomeItc%402022@18.132.73.146:5432/testdb'
         # Create a SQLAlchemy engine for PostgreSQL
         engine = create_engine(DATABASE_URL)
 
