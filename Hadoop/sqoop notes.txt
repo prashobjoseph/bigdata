@@ -1,0 +1,47 @@
+sqoop
+*********
+sqoop list-databases --connect jdbc:postgresql://18.132.73.146:5432/testdb --username consultants -P // create connection
+
+password: WelcomeItc@2022
+
+************
+
+sqoop list-tables --connect jdbc:postgresql://18.132.73.146:5432/testdb --username consultants -P // list contents
+
+
+firsttablepr29
+
+
+sqoop import --connect jdbc:postgresql://18.132.73.146:5432/testdb --username consultants --password WelcomeItc@2022 --table person --m 1 --target-dir /tmp/bigdata_nov_2024/prashob/postgres3 // importing data from postgres to hdfs 
+
+// person is table name
+
+
+SELECT column_name
+FROM information_schema.columns
+WHERE table_schema = 'public'
+  AND table_name = 'person';
+***********************************
+column names: 
+name string,
+age string,
+gender string,
+city string,
+country string,
+has_pet string,
+id int
+***********************************
+CREATE EXTERNAL TABLE prashob.person (                      // use hue to run it
+  name string,
+age string,
+gender string,
+city string,
+country string,
+has_pet string,
+id int
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','  
+LINES TERMINATED BY '\n'  
+STORED AS TEXTFILE
+LOCATION '/tmp/bigdata_nov_2024/prashob/postgres/';

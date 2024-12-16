@@ -1,0 +1,75 @@
+File and Directory Management
+
+ls
+Lists the contents of a directory.
+
+cd [directory]
+Changes the current directory.
+
+pwd
+Displays the current working directory.
+
+mkdir [directory]
+Creates a new directory.
+
+rmdir [directory]
+Removes an empty directory.
+
+rm [file]
+Deletes a file. Use -r to delete directories recursively.
+
+cp [source] [destination]
+Copies files or directories.
+
+mv [source] [destination]
+Moves or renames files or directories.
+
+touch [file]
+Creates an empty file or updates the timestamp of an existing file.
+
+find [directory] -name [name]
+Searches for files or directories by name.
+
+File Viewing and Manipulation
+cat [file]
+Displays the contents of a file.
+
+more [file]
+Views file content one page at a time.
+
+less [file]
+Views file content with backward navigation.
+
+head -n [lines] [file]
+Displays the first few lines of a file.
+
+tail -n [lines] [file]
+Displays the last few lines of a file. Use -f to follow changes in real time.
+
+
+
+User and Permissions Management
+
+chmod [permissions] [file]
+Changes file or directory permissions.
+
+chown [user]:[group] [file]
+Changes the owner of a file or directory.
+
+whoami
+Displays the current logged-in user.
+
+sudo [command]
+Executes a command with superuser privileges.
+
+passwd
+Changes the user password.
+
+
+
+ls - list contents of directory
+
+cat - display contents of file
+
+vi - create a file and add input to it.
+

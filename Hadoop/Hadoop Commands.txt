@@ -1,0 +1,90 @@
+File System Operations
+
+hadoop fs -ls /path
+Lists the contents of a directory.
+
+hadoop fs -ls -R /path
+Recursively lists files and directories.
+
+hadoop fs -mkdir /path
+Creates a new directory in HDFS.
+
+hadoop fs -mkdir -p /path/subpath
+Creates a directory and any necessary parent directories.
+
+hadoop fs -touchz /path/file
+Creates an empty file.
+
+hadoop fs -cat /path/file
+Displays the contents of a file.
+
+hadoop fs -get /path/file /local_path
+Copies a file from HDFS to the local file system.
+
+hadoop fs -put /local_path/file /path
+Uploads a file from the local file system to HDFS.
+
+hadoop fs -copyFromLocal /local_path/file /path
+Another way to upload a local file to HDFS.
+
+hadoop fs -copyToLocal /path/file /local_path
+Another way to download a file from HDFS.
+
+
+
+File and Directory Management
+
+hadoop fs -rm /path/file
+Deletes a file from HDFS.
+
+hadoop fs -rm -r /path
+Recursively deletes a directory and its contents.
+
+hadoop fs -rmdir /path
+Removes an empty directory.
+
+hadoop fs -mv /path/source /path/destination
+Moves or renames a file or directory.
+
+hadoop fs -cp /path/source /path/destination
+Copies a file or directory.
+
+File Inspection and Metadata
+hadoop fs -du -s /path
+Shows the disk usage of a directory or file.
+
+hadoop fs -du -h /path
+Displays human-readable disk usage.
+
+hadoop fs -stat "%n %b" /path/file
+Displays file or directory statistics, like block size and name.
+
+hadoop fsck /path
+Runs a file system check on the specified path.
+
+hadoop fs -chmod 755 /path
+Changes the permissions of a file or directory.
+
+Other Commands
+
+hadoop fs -chown user:group /path
+Changes the owner and group of a file or directory.
+
+hadoop fs -appendToFile /local_file /path
+Appends the content of a local file to an existing HDFS file.
+
+hadoop fs -tail /path/file
+Displays the last few lines of a file.
+
+hadoop fs -count /path
+Shows the count of directories, files, and bytes under a path.
+
+
+hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-streaming.jar \
+ -files csvmap1.py,csvreduce1.py \
+ -mapper "csvmap1.py" \
+ -reducer "csvreduce1.py" \
+ -input /tmp/bigdata_nov_2024/prashob/data/data \
+ -output /tmp/bigdata_nov_2024/prashob/csv_output
+
+Command to run mapreduce
