@@ -1,0 +1,35 @@
+Hive partitioning and  bucketing
+********************************
+
+
+-- Step 1: Enable Bucketing and Partitioning
+SET hive.exec.dynamic.partition = true;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+SET hive.enforce.bucketing = true;
+
+
+
+-- Step 2: Create a Partitioned and Bucketed Table
+CREATE TABLE sales_data (
+    sale_id INT,
+    product_name STRING,
+    sale_amount DOUBLE
+)
+PARTITIONED BY (region STRING) -- Partition column
+CLUSTERED BY (sale_id) INTO 4 BUCKETS; -- Bucketing column and number of buckets
+
+
+
+-- Step 3: Load Data into the Partitioned and Bucketed Table
+INSERT OVERWRITE TABLE sales_data PARTITION (region)
+SELECT 
+    sale_id,
+    product_name,
+    sale_amount,
+    region
+FROM sales_staging; -- Replace with the name of your source table
+
+
+
+-- Step 4: Query the Partitioned and Bucketed Table
+SELECT * FROM sales_data WHERE region = 'North' AND sale_id = 101;
