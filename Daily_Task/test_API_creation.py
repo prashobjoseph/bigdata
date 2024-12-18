@@ -15,4 +15,6 @@ def test_get_data(client):
     data = response.get_json()  # Parse the JSON response
     assert isinstance(data, list)  # Check if the response is a list
     assert len(data) > 0  # Ensure there's at least one record
-    assert "marital" in data[0]  # Replace 'bank_name' with an actual field from your table
+    assert "marital" in data[0]  # Replace '' with an actual field from your table
+
+    
