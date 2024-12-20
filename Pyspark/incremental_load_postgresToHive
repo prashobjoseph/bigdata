@@ -11,16 +11,16 @@ spark = SparkSession.builder \
 # Step 2: Get the maximum ID from the Hive table
 # Check if the Hive table exists
 try:
-    max_id = spark.sql("SELECT MAX(id) FROM bigdata_nov_2024.personprashob").collect()[0][0]
-    if max_id is None:  # If the table is empty
-        max_id = 0
+    max_timestamp = spark.sql("SELECT MAX(last_updated) FROM bigdata_nov_2024.prashtest").collect()[0][0]
+    if max_timestamp is None:  # If the table is empty
+        max_timestamp = 0
 except:
-    max_id = 0  # If the table does not exist
+    max_timestamp = 0  # If the table does not exist
 
-print(f"Max ID in Hive: {max_id}")
+print(f"Max ID in Hive: {max_timestamp}")
 
 # Step 3: Construct the query to fetch only new records from PostgreSQL
-query = f'SELECT * FROM person WHERE id > {max_id}'
+query = f'SELECT * FROM person WHERE last_updated > {max_timestamp}'
 
 # Step 4: Read the new data from PostgreSQL
 new_data = spark.read.format("jdbc") \
