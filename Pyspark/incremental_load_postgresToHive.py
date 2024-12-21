@@ -20,7 +20,7 @@ except:
 print(f"Max timestamp in Hive: {max_timestamp}")
 
 # Step 3: Construct the query to fetch only new records from PostgreSQL
-query = f'SELECT * FROM prashtest WHERE last_updated > {max_timestamp}'
+query = f'SELECT * FROM test.dbprashtest WHERE last_updated > {max_timestamp}'
 
 # Step 4: Read the new data from PostgreSQL
 #new_data = spark.read.format("jdbc") \
@@ -44,4 +44,5 @@ else:
     print("No new data to load.")
 
 # End of the script
+
 spark.stop()
