@@ -23,7 +23,8 @@ print("Max timestamp in Hive: {}".format(max_timestamp))
 
 # Step 3: Construct the query to fetch only new records from PostgreSQL
 #query = f'SELECT * FROM prashtest WHERE last_updated > {max_timestamp}'
-query = f"SELECT * FROM prashtest WHERE last_updated > '{max_timestamp}'"
+query = "SELECT * FROM prashtest WHERE last_updated > '{}'".format(max_timestamp)
+
 
 
 # Step 4: Read the new data from PostgreSQL
