@@ -17,7 +17,9 @@ try:
 except:
     max_timestamp = 0  # If the table does not exist
 
-print(f"Max timestamp in Hive: {max_timestamp}")
+#print(f"Max timestamp in Hive: {max_timestamp}")
+print("Max timestamp in Hive: {}".format(max_timestamp))
+
 
 # Step 3: Construct the query to fetch only new records from PostgreSQL
 query = f'SELECT * FROM prashtest WHERE last_updated > {max_timestamp}'
