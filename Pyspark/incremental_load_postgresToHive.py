@@ -36,7 +36,7 @@ query = "SELECT * FROM prashtest WHERE last_updated > '{}'".format(max_timestamp
    # .option("query", query) \
    # .load()
 
-new_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("dbtable", "prashtest").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
+new_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
 
 new_data.printSchema()
 new_data.show(10)
