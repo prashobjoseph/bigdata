@@ -27,15 +27,6 @@ query = "SELECT * FROM prashtest WHERE last_updated > '{}'".format(max_timestamp
 
 
 
-# Step 4: Read the new data from PostgreSQL
-#new_data = spark.read.format("jdbc") \
-  #  .option("url", "jdbc:postgresql://18.132.73.146:5432/testdb") \
-  #  .option("driver", "org.postgresql.Driver") \
-   # .option("user", "consultants") \
-   # .option("password", "WelcomeItc@2022") \
-   # .option("query", query) \
-   # .load()
-
 new_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
 
 new_data.printSchema()
@@ -51,3 +42,21 @@ else:
 # End of the script
 
 spark.stop()
+
+#requirements of sql table from which data is imported
+
+#ALTER TABLE prashtest ADD COLUMN last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+#CREATE OR REPLACE FUNCTION update_last_updated_column()
+#RETURNS TRIGGER AS $$
+#BEGIN
+#   NEW.last_updated = CURRENT_TIMESTAMP;
+#  RETURN NEW;
+#END;
+#$$ LANGUAGE plpgsql;
+
+#CREATE TRIGGER set_last_updated
+#BEFORE INSERT OR UPDATE ON prashtest
+#FOR EACH ROW
+#EXECUTE FUNCTION update_last_updated_column();
+
