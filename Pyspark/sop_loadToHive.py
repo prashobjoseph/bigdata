@@ -23,7 +23,7 @@ def transform_data(df):
     
     # Transformation 4: Add 'Age' column (using 'birth_date')
     if "dob" in df.columns:
-        df = df.withColumn("dob", col("birth_date").cast(DateType()))  # Ensure 'birth_date' is DateType
+        df = df.withColumn("dob", col("dob").cast(DateType()))  # Ensure 'birth_date' is DateType
         df = df.withColumn("Age", (datediff(current_date(), col("dob")) / 365).cast("int"))  # Calculate approximate age
     
     # Transformation 5: Extract the date and create a new column
