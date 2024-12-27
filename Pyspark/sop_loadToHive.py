@@ -21,9 +21,9 @@ def transform_data(df):
     # Transformation 3: Rename columns
     df = df.withColumnRenamed("first", "first_name").withColumnRenamed("last", "last_name").withColumnRenamed("city_pop", "population")
     
-    # Transformation 4: Add 'Age' column (using 'birth_date')
+    # Transformation 4: Add 'Age' column (using 'dob')
     if "dob" in df.columns:
-        df = df.withColumn("dob", col("dob").cast(DateType()))  # Ensure 'birth_date' is DateType
+        df = df.withColumn("dob", col("dob").cast(DateType()))  # Ensure 'dob' is DateType
         df = df.withColumn("Age", (datediff(current_date(), col("dob")) / 365).cast("int"))  # Calculate approximate age
     
     # Transformation 5: Extract the date and create a new column
@@ -54,3 +54,6 @@ if __name__ == "__main__":
     
     # Save the transformed data to Hive
     save_to_hive(transformed_df)
+
+#cd Pyspark
+#spark-submit --master local[*] --jars /var/lib/jenkins/workspace/nagaranipysparkdryrun/lib/postgresql-42.5.3.jar sop_loadToHive.py
