@@ -55,5 +55,5 @@ if __name__ == "__main__":
     # Save the transformed data to Hive
     save_to_hive(transformed_df)
 
-#cd Pyspark
+#cd Mini_Project
 #spark-submit --master local[*] --jars /var/lib/jenkins/workspace/nagaranipysparkdryrun/lib/postgresql-42.5.3.jar sop_loadToHive.py
