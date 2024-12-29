@@ -20,7 +20,7 @@ try:
 
     # Read data from PostgreSQL using the query
     new_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
-    new_data.show()
+    #new_data.show()
     # Check if there is new data to append
     if new_data.count() == 0:
         print("No new records to append.")
@@ -44,6 +44,11 @@ try:
 
         # Extract the date and create a new column
         new_data = new_data.withColumn("Date", to_date(col("trans_date_trans_time")))
+
+        # Transformation 6: Rename the first column to "id"
+        first_column = new_data.columns[0]  # Get the name of the first column
+        new_data = new_data.withColumnRenamed(first_column, "id")  # Rename the first column to "id"
+
         new_data.show()
         # Append the new data to the Hive table
         new_data.write.mode("append").saveAsTable("bigdata_nov_2024.sop_credit_trans")
