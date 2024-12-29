@@ -20,7 +20,7 @@ try:
 
     # Read data from PostgreSQL using the query
     new_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
-    print(new_data)
+    new_data.show()
     # Check if there is new data to append
     if new_data.count() == 0:
         print("No new records to append.")
