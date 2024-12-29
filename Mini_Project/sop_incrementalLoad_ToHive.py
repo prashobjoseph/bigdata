@@ -17,6 +17,8 @@ try:
     # Formulate the query to fetch new data from PostgreSQL
     query = "(SELECT * FROM sop_credit_transaction WHERE trans_date_trans_time > '{}') AS new_transactions".format(max_time)
 
+    print(query)
+
     # Read data from PostgreSQL using the query
     new_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
     print(new_data)
