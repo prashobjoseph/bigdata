@@ -1,6 +1,5 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
-
 try:
     # Initialize SparkSession with Hive support
     spark = SparkSession.builder.master("local").appName("MiniProj").enableHiveSupport().getOrCreate()
@@ -36,7 +35,11 @@ try:
         new_data = new_data.withColumnRenamed("first", "first_name").withColumnRenamed("last", "last_name").withColumnRenamed("city_pop", "population")
 
         # Transformation 4: Add 'Age' column
-        new_data = new_data.withColumn("dob", col("dob").cast(DataType()))  # Ensure it's a date type
+        from pyspark.sql.types import DateType
+
+        new_data = new_data.withColumn("dob", col("dob").cast(DateType()))
+
+        #new_data = new_data.withColumn("dob", col("dob").cast(DataType()))  # Ensure it's a date type
         new_data = new_data.withColumn("Age", datediff(current_date(), col("dob")) / 365)  # Approximate age
 
         # Extract the date and create a new column
