@@ -44,12 +44,12 @@ try:
 
         # Extract the date and create a new column
         new_data = new_data.withColumn("Date", to_date(col("trans_date_trans_time")))
-
+        new_data.show()
         # Append the new data to the Hive table
         new_data.write.mode("append").saveAsTable("bigdata_nov_2024.sop_credit_trans")
         print("Successfully loaded new records to Hive.")
 
-    print(new_data)
+    
 
 except Exception as e:
     # Print the error message
