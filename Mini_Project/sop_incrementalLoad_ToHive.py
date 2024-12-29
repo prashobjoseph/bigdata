@@ -15,7 +15,7 @@ try:
     
 
     # Formulate the query to fetch new data from PostgreSQL
-    query = "(SELECT * FROM sop_credit_transaction WHERE trans_date_trans_time > '{}') AS new_transactions".format(max_time)
+    query = "SELECT * FROM sop_credit_transaction WHERE trans_date_trans_time > '{}'".format(max_time)
 
     print(query)
 
