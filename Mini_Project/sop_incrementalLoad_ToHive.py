@@ -19,7 +19,7 @@ try:
 
     # Read data from PostgreSQL using the query
     new_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
-
+    print(new_data)
     # Check if there is new data to append
     if new_data.count() == 0:
         print("No new records to append.")
@@ -43,6 +43,8 @@ try:
         # Append the new data to the Hive table
         new_data.write.mode("append").saveAsTable("bigdata_nov_2024.sop_credit_trans")
         print("Successfully loaded new records to Hive.")
+
+    print(new_data)
 
 except Exception as e:
     # Print the error message
