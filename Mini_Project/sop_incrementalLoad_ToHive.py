@@ -8,10 +8,11 @@ try:
     # Fetch the maximum trans_date_trans_time from the Hive table
     max_time_df = spark.sql("SELECT max(trans_date_trans_time) as max_time FROM bigdata_nov_2024.sop_credit_trans")
     max_time = max_time_df.collect()[0]["max_time"]
-
+    print("Maximum transaction date is {}".format(max_time))
     # Ensure max_time is not None; if None, initialize to a very old date
     if max_time is None:
         max_time = "1900-01-01 00:00:00"
+    
 
     # Formulate the query to fetch new data from PostgreSQL
     query = "(SELECT * FROM sop_credit_transaction WHERE trans_date_trans_time > '{}') AS new_transactions".format(max_time)
