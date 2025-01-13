@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, max as spark_max, lit
 import os
 import pandas as pd
-
+TABLE_NAME= "sop_credit_transaction_test1"
 try:
     # Initialize Spark session
     spark = SparkSession.builder.appName("Fraud Detection - Next Batch Load").config("spark.jars", "/C:/Users/prash/Downloads/postgresql-42.7.4.jar").getOrCreate()
@@ -34,7 +34,7 @@ try:
 
     # Read the max transaction date from the database
     existing_data = spark.read \
-        .jdbc(url=database_url,table="sop_credit_transaction", properties=db_properties)
+        .jdbc(url=database_url,table=TABLE_NAME, properties=db_properties)
 
     max_date_in_db = existing_data.select(spark_max("trans_date_trans_time")).first()[0]
     print("Max transaction date in database: {}".format(max_date_in_db))
@@ -49,7 +49,7 @@ try:
     print("Next batch data rows (60 days): {} rows.".format(next_batch_data.count()))
 
     # Write the next batch data to the database
-    next_batch_data.write.jdbc(url=database_url, table="sop_credit_transaction", mode="append", properties=db_properties)
+    next_batch_data.write.jdbc(url=database_url, table=TABLE_NAME, mode="append", properties=db_properties)
     print("Next batch data written to the database successfully.")
 
 except FileNotFoundError as fnf_error:
