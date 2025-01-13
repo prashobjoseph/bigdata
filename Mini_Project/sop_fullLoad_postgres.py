@@ -3,6 +3,8 @@ from pyspark.sql.functions import col, min as spark_min, max as spark_max, lit
 import os
 import pandas as pd
 
+TABLE_NAME= "sop_credit_transaction_test1"
+
 try:
     # Initialize Spark session
     spark = SparkSession.builder.appName("Fraud Detection").config("spark.jars", "/C:/Users/prash/Downloads/postgresql-42.7.4.jar").getOrCreate()
@@ -41,7 +43,7 @@ try:
     }
 
     # Write the filtered data to the database
-    filtered_data.write.jdbc(url=database_url, table="sop_credit_transaction_test1", mode="overwrite", properties=db_properties)
+    filtered_data.write.jdbc(url=database_url, table=TABLE_NAME, mode="overwrite", properties=db_properties)
     print("Filtered data written to the database successfully.")
 
 except FileNotFoundError as fnf_error:
