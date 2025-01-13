@@ -5,7 +5,7 @@ try:
     spark = SparkSession.builder.master("local").appName("MiniProj").enableHiveSupport().getOrCreate()
 
     # Fetch the maximum trans_date_trans_time from the Hive table
-    max_time_df = spark.sql("SELECT max(trans_date_trans_time) as max_time FROM bigdata_nov_2024.sop_credit_trans")
+    max_time_df = spark.sql("SELECT max(trans_date_trans_time) as max_time FROM bigdata_nov_2024.sop_credit_trans_test1")
     max_time = max_time_df.collect()[0]["max_time"]
     print("Maximum transaction date is {}".format(max_time))
     # Ensure max_time is not None; if None, initialize to a very old date
@@ -14,7 +14,7 @@ try:
     
 
     # Formulate the query to fetch new data from PostgreSQL
-    query = "SELECT * FROM sop_credit_transaction WHERE trans_date_trans_time > '{}'".format(max_time)
+    query = "SELECT * FROM sop_credit_transaction_test1 WHERE trans_date_trans_time > '{}'".format(max_time)
 
     print(query)
 
@@ -51,7 +51,7 @@ try:
 
         new_data.show()
         # Append the new data to the Hive table
-        new_data.write.mode("append").saveAsTable("bigdata_nov_2024.sop_credit_trans")
+        new_data.write.mode("append").saveAsTable("bigdata_nov_2024.sop_credit_trans_test1")
         print("Successfully loaded new records to Hive.")
 
     
