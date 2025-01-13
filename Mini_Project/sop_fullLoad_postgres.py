@@ -41,7 +41,7 @@ try:
     }
 
     # Write the filtered data to the database
-    filtered_data.write.jdbc(url=database_url, table="sop_credit_transaction", mode="overwrite", properties=db_properties)
+    filtered_data.write.jdbc(url=database_url, table="sop_credit_transaction_test1", mode="overwrite", properties=db_properties)
     print("Filtered data written to the database successfully.")
 
 except FileNotFoundError as fnf_error:

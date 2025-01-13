@@ -8,7 +8,7 @@ def initialize_spark():
 
 def load_data_from_postgres(spark):
     """Load data from PostgreSQL."""
-    return spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("dbtable", "sop_credit_transaction").option("user", "consultants").option("password", "WelcomeItc@2022").load()
+    return spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("dbtable", "sop_credit_transaction_test1").option("user", "consultants").option("password", "WelcomeItc@2022").load()
     
 def transform_data(df):
     """Apply transformations to the dataframe."""
@@ -38,7 +38,7 @@ def transform_data(df):
 
 def save_to_hive(df):
     """Write the transformed dataframe to Hive."""
-    df.write.mode("overwrite").saveAsTable("bigdata_nov_2024.sop_credit_trans")
+    df.write.mode("overwrite").saveAsTable("sop2024.sop_credit_trans_test1")
     print("Successfully Loaded to Hive")
 
 
