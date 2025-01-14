@@ -41,7 +41,7 @@ def transform_data(df):
 
 def save_to_hive(df):
     """Write the transformed dataframe to Hive."""
-    df.write.mode("overwrite").saveAsTable("bigdata_nov_2024.()".format(HIVE_TABLE_NAME))
+    df.write.mode("overwrite").saveAsTable("bigdata_nov_2024.{}".format(HIVE_TABLE_NAME))
     print("Successfully Loaded to Hive")
 
 
