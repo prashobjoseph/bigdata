@@ -1,8 +1,8 @@
 from pyspark.sql import *
 from pyspark.sql.functions import *
 
-PG_TABLE_NAME= "sop_credit_transaction_test1"
-HIVE_TABLE_NAME="sop_credit_trans_test1"
+PG_TABLE_NAME= "sop_credit_transaction_test2"
+HIVE_TABLE_NAME="sop_credit_trans_test2"
 
 try:
     # Initialize SparkSession with Hive support
