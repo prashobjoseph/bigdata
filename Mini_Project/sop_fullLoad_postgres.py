@@ -3,7 +3,7 @@ from pyspark.sql.functions import col, min as spark_min, max as spark_max, lit
 import os
 import pandas as pd
 
-TABLE_NAME= "sop_credit_transaction_test1"
+TABLE_NAME= "sop_credit_transaction_test2"
 
 try:
     # Initialize Spark session
