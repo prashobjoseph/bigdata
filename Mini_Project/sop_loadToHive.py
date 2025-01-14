@@ -2,8 +2,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, datediff, current_date, to_date
 from pyspark.sql.types import DateType
 
-PG_TABLE_NAME= "sop_credit_transaction_test2"
-HIVE_TABLE_NAME="sop_credit_trans_test2"
+PG_TABLE_NAME= "sop_credit_transaction_test3"
+HIVE_TABLE_NAME="sop_credit_trans_test3"
 
 def initialize_spark():
     """Initialize the Spark session."""

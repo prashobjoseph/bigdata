@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, max as spark_max, lit
 import os
 import pandas as pd
-TABLE_NAME= "sop_credit_transaction_test2"
+TABLE_NAME= "sop_credit_transaction_test3"
 try:
     # Initialize Spark session
     spark = SparkSession.builder.appName("Fraud Detection - Next Batch Load").config("spark.jars", "/C:/Users/prash/Downloads/postgresql-42.7.4.jar").getOrCreate()
